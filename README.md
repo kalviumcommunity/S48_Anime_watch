@@ -34,3 +34,7 @@ Internet connection
 Frontend: HTML, CSS, JavaScript
 Backend: Node.js
 Database: MongoDB
+
+Render Deployment Link
+
+https://anime-watch.onrender.com/
