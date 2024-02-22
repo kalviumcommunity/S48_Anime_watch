@@ -1,59 +1,64 @@
 const express = require('express');
 const router = express.Router();
-const { execFile } = require('child_process');
 
-// CRUD routes
+let anime = [
+  {id: 1, anime_name: "naruto", genre: "Action, Fantasy"},
+  {id: 2, anime_name: "naruto", genre: "Action, Fantasy"},
+  {id: 3, anime_name: "naruto", genre: "Action, Fantasy"}
+];
 
-// Create
-router.post('/resource', (req, res) => {
-  execFile('bruno', ['docs.bruno/create.bru'], (error, stdout, stderr) => {
-    if (error) {
-      console.error('Error executing create.bru:', error);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-    console.log(stdout);
-    res.status(200).send('Resource created successfully');
-  });
+// Get all anime
+router.get('/anime', (req, res) => {
+  res.json(anime);
 });
 
-// Read
-router.get('/resource/:id', (req, res) => {
-  execFile('bruno', ['docs.bruno/read.bru'], (error, stdout, stderr) => {
-    if (error) {
-      console.error('Error executing read.bru:', error);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-    console.log(stdout);
-    res.status(200).send('Resource retrieved successfully');
-  });
+// Get a specific anime by ID
+router.get('/anime/:id', (req, res) => {
+  const animeId = parseInt(req.params.id);
+  const foundAnime = anime.find(a => a.id === animeId);
+  if (foundAnime) {
+    res.json(foundAnime);
+  } else {
+    res.status(404).json({ message: 'Anime not found' });
+  }
 });
 
-// Update
-router.put('/resource/:id', (req, res) => {
-  execFile('bruno', ['docs.bruno/update.bru'], (error, stdout, stderr) => {
-    if (error) {
-      console.error('Error executing update.bru:', error);
-      res.status(500).send('Internal Server Error');
-      return;
-    }
-    console.log(stdout);
-    res.status(200).send('Resource updated successfully');
-  });
+// Add a new anime
+router.post('/anime', (req, res) => {
+  const newAnime = {
+    id: anime.length + 1,
+    anime_name: req.body.anime_name,
+    genre: req.body.genre
+  };
+  anime.push(newAnime);
+  res.status(201).json(newAnime);
 });
 
-// Delete
-router.delete('/resource/:id', (req, res) => {
-  execFile('bruno', ['docs.bruno/delete.bru'], (error, stdout, stderr) => {
-    if (error) {
-      console.error('Error executing delete.bru:', error);
-      res.status(500).send('Internal Server Error');
-      return;
+// Update an anime by ID
+router.put('/anime/:id', (req, res) => {
+  const id = parseInt(req.params.id);
+  const updatedAnime = anime.find((item) => item.id === id);
+
+  if (updatedAnime) {
+    // Update properties based on request body
+    if (req.body.anime_name) {
+      updatedAnime.anime_name = req.body.anime_name;
     }
-    console.log(stdout);
-    res.status(200).send('Resource deleted successfully');
-  });
+    if (req.body.genre) {
+      updatedAnime.genre = req.body.genre;
+    }
+
+    res.json(updatedAnime);
+  } else {
+    res.status(404).json({ message: 'Anime not found' });
+  }
+});
+
+// Delete an anime by ID
+router.delete('/anime/:id', (req, res) => {
+  const animeId = parseInt(req.params.id);
+  anime = anime.filter(a => a.id !== animeId);
+  res.status(204).send();
 });
 
 module.exports = router;
