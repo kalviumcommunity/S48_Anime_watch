@@ -1,0 +1,75 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&display=swap");
+
+* {
+  font-family: "Mukta", sans-serif;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.signup-page {
+  width: 600px;
+  height: 600px;
+  margin: 10% auto;
+  padding: 20px;
+  background-color: darkgray;
+  border-radius: 15px;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+form {
+  max-width: 400px;
+  margin: 90px auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  margin-left: 20px;
+  color: black;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: background-color 0.5s ease;
+}
+
+input::placeholder {
+  color: gray;
+}
+input:hover{
+  background-color: rgb(117, 61, 61);
+}
+.SignUpBtn {
+  background-color: yellow;
+  color: rgb(82, 82, 82);
+  padding: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100px;
+  font-size: 1em;
+  align-items: center;
+  margin-top: 10px;
+  transition: background-color 0.9s ease;
+}
+.SignUpBtn:hover{
+  background-color: orange;
+}
