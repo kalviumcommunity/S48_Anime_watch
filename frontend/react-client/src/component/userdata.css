@@ -1,0 +1,22 @@
+.table-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table th,
+  .table td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+  }
+  
+  .table th {
+    background-color: #a68080;
+  }
+  
