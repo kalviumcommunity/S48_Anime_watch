@@ -1,8 +1,8 @@
-// App.jsx
-import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import LandingPage from "./component/LandingPage";
 import SignUp from "./component/Signup";
+import UserList from "./component/userdata";
+
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/UserList" element={<UserList />} />
       </Routes>
     </Router>
   );
