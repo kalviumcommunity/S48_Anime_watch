@@ -10,7 +10,7 @@ function AnimeWebsite() {
                 <div className="top-bar">
                     <Link to="/" className="login-signup-btn">Login</Link>
                     <Link to="/Signup" className="login-signup-btn">Signup</Link>
-                    <Link to="/UserList" className="login-signup-btn">Userlist</Link>
+                    <Link to="/Users" className="login-signup-btn">Userlist</Link>
                 </div>
             </div>
             <div className="content">

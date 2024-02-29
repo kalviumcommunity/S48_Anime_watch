@@ -1,18 +1,27 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+//app.jsx
+
+import { useState } from 'react';
+import {BrowserRouter, Routes, Route}  from 'react-router-dom';
+import "bootstrap/dist/css/bootstrap.min.css";
 import LandingPage from "./component/LandingPage";
 import SignUp from "./component/Signup";
-import UserList from "./component/userdata";
+import Users from "./component/Users";
+// import CreateUser from "./component/CreateUser";
+// import UpdateUser from "./component/UpdateUser";
 
-
-function App() {
+function App(){
+  const [count, setCount]=useState(0)
+  
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/UserList" element={<UserList />} />
+        <Route path="/Users" element={<Users />} />
+        {/* <Route path="/create" element={<CreateUser/>}/>
+        <Route path="/update/:id" element={<UpdateUser/>}/> */}
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
 

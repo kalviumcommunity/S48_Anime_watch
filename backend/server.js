@@ -18,20 +18,43 @@ mongoose.connect("mongodb+srv://Rajkumar:Rajkumar%402005@atlascluster.qafd72h.mo
 app.use('/', routes);
 
 // Additional route
-app.get('/getuser', (req, res) => {
-  UserModel.find()
-    .then(user => {
-      console.log("Users:", user);
-      if (user.length === 0) {
-        return res.status(404).json({ error: "No users found" });
-      }
-      res.json(user);
-    })
-    .catch(err => {
-      console.error("Error fetching users:", err);
-      res.status(500).json({ error: "Internal server error" });
-    });
-});
+app.get('/', (req, res) => {
+  UserModel.find({})
+  .then(users => res.json(users))
+  .catch(err => res.json(err))
+})
+
+app.get('/getUser/:id', (req, res)=>{
+  const id = req.params.id;
+  UserModel.findById({_id:id})
+  .then(users => res.json(users))
+  .catch(err => res.json(err))
+})
+
+// app.put('/updateUser/:id', (req, res) => {
+//   const id = req.params.id;
+//   UserModel.findByIdAndUpdate(id, {
+//       username: req.body.username,
+//       email: req.body.email,
+//       favorite_anime_list: req.body.favorite_anime_list,
+//       watchlist: req.body.watchlist
+//   }, { new: true })
+//   .then(updatedUser => res.json(updatedUser))
+//   .catch(err => res.status(500).json(err));
+// });
+
+// app.delete('/deleteUser/:id',  (req,res) =>{
+//   const id= req.params.id;
+//   UserModel.findByIdAndDelete({ _id : id })
+//   .then(res => res.json(res))
+//   .catch(err => res.json(err))
+// })
+
+app.post("/createUser",(req, res)=>{
+  UserModel.create(req.body)
+  .then(users => res.json(users))
+  .catch(err => res.json(err))
+})
 
 // Default 404 route
 app.use((req, res) => res.status(404).send('Not found'));
