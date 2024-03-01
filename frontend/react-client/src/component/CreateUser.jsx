@@ -3,18 +3,23 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 function CreateUser(){
-    const [name, setName] = useState()
-    const [email, setEmail] = useState()
-    const [favorite_anime_list, setFavorite_Anime_List] = useState()
-    const [watchlist, setWatchlist] = useState()
+    const [username, setUsername] = useState(""); // <-- Initialize with empty string
+    const [email, setEmail] = useState("");
+    const [favorite_anime_list, setFavorite_Anime_List] = useState("");
+    const [watchlist, setWatchlist] = useState("");
     const navigate = useNavigate()
 
     const Submit = (e) =>{
         e.preventDefault();
-        axios.post("http://localhost:3000/createUser", {name, email, favorite_anime_list, watchlist})
+        axios.post("http://localhost:3000/createuser", {
+            username: username,
+            email: email,
+            favorite_anime_list: favorite_anime_list,
+            watchlist: watchlist
+        })
         .then(result => {
             console.log(result)
-            navigate('/')
+            navigate('/Users')
         })
         .catch(err => console.log(err))
     }
@@ -27,7 +32,7 @@ function CreateUser(){
                     <div className="mb-2">
                         <label htmlFor="">Name </label>
                         <input type="text" placeholder="Enter Name" className="form-control"
-                        onChange={(e)=>setName(e.target.value)}/>
+                        onChange={(e)=>setUsername(e.target.value)}/> {/* <-- Set username state */}
                     </div>
                     <div className="mb-2">
                         <label htmlFor="">Email </label>
