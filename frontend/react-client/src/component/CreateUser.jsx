@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from "react-router-dom";
 
 function CreateUser(){
-    const [username, setUsername] = useState(""); // <-- Initialize with empty string
+    const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [favorite_anime_list, setFavorite_Anime_List] = useState("");
     const [watchlist, setWatchlist] = useState("");
