@@ -27,7 +27,7 @@ function UpdateUser() {
         axios.put(`http://localhost:3000/updateUser/${id}`, { username, email, favorite_anime_list })
             .then(response => {
                 console.log(response);
-                navigate('/');
+                navigate('/Users');
             })
             .catch(error => console.log(error));
     }
