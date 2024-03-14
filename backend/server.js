@@ -1,4 +1,6 @@
+require("dotenv").config();
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Joi = require('joi');
@@ -11,7 +13,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 const PORT = process.env.PORT || 3000;
-
+const secretKey = process.env.JWT_SECRET
 mongoose.connect("mongodb+srv://Rajkumar:Rajkumar%402005@atlascluster.qafd72h.mongodb.net/From_Laughter_to_Tears");
 
 app.use('/', routes);
@@ -147,11 +149,15 @@ app.post("/api/login", async (req, res) => {
     const user = await SignupModel.findOne({ username });
     if (!user) {
       return res.status(400).json({ success: false, message: "Invalid credentials" });
-    }
+    }  
+    const token = jwt.sign({ username: user.username }, secretKey)
+    // Set cookie with token
+    res.cookie("token", token, { httpOnly: true });
+
 
     // Set cookie and respond
     res.cookie("username", username);
-    res.json({ success: true, message: "Login successful", username });
+    res.json({ success: true, message: "Login successful", username,token });
     console.log("login success", username);
   } catch (error) {
     console.error("Error during login:", error);

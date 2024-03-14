@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Cookies from "js-cookie"
 import { useNavigate } from "react-router-dom";
 import "./Login.css"
 
@@ -17,6 +18,8 @@ const Login = () => {
       console.log("Server Response:", response);
       if (response.data.success) {
         document.cookie = `username=${username}; path=/`;
+        Cookies.set("token",response.data.token)
+
         setUsername("");
         setPassword("");
         navigate("/");
