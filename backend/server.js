@@ -1,7 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { UserModel, schema } = require('./model/user');
+const Joi = require('joi');
+const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
+const { UserModel, LoginModel, addLogin, SignupModel, addSignup } = require('./model/user'); // Import UserModel and loginSchema
 const routes = require('./routes');
 
 const app = express();
@@ -86,6 +88,74 @@ app.post("/createUser", async (req, res) => {
       success: false,
       message: "An error occurred while creating the user",
     });
+  }
+});
+
+app.post("/api/signup", async (req, res) => {
+  try {
+    const { username, email, password } = req.body;
+
+    // Validate request body using Joi
+    const { error } = addSignup.validate({ username, email, password });
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
+
+    // Check if the username already exists
+    const signcheck = await SignupModel.findOne({ username });
+    if (signcheck) {
+      return res.status(400).json({
+        success: false,
+        message: "Username already exists",
+      });
+    }
+
+    // Create a new user
+    const signupuser = new SignupModel({
+      username,
+      email,
+      password,
+    });
+    await signupuser.save();
+
+    res.json({
+      success: true,
+      message: "User created successfully",
+      user: signupuser,
+    });
+  } catch (error) {
+    // Handle any unexpected errors
+    console.error("Error creating user:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while creating the user",
+    });
+  }
+});
+
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  try {
+    // Validate request body
+    const { error } = addLogin.validate({ username, password });
+    if (error) {
+      return res.status(400).json({ success: false, message: error.details[0].message });
+    }
+
+    // Find user by username in signup database
+    const user = await SignupModel.findOne({ username });
+    if (!user) {
+      return res.status(400).json({ success: false, message: "Invalid credentials" });
+    }
+
+    // Set cookie and respond
+    res.cookie("username", username);
+    res.json({ success: true, message: "Login successful", username });
+    console.log("login success", username);
+  } catch (error) {
+    console.error("Error during login:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 });
 
