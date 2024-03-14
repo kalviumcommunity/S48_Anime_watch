@@ -1,4 +1,3 @@
-// import React from 'react';
 import { Link } from 'react-router-dom'
 import './LandingPage.css';
 
@@ -8,7 +7,7 @@ function AnimeWebsite() {
             <div className="header">
                 <h1 className="title">From Laughter to Tears: List of ANIME to watch</h1>
                 <div className="top-bar">
-                    <Link to="/" className="login-signup-btn">Login</Link>
+                    <Link to="/login" className="login-signup-btn">Login</Link>
                     <Link to="/Signup" className="login-signup-btn">Signup</Link>
                     <Link to="/Users" className="login-signup-btn">Userlist</Link>
                 </div>
