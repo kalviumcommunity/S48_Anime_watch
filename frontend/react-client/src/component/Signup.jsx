@@ -29,7 +29,7 @@ function SignUp() {
         })
         .then(result => {
             console.log(result)
-            navigate('/')
+            navigate('/Home')
         })
         .catch(err => console.log(err))
     }

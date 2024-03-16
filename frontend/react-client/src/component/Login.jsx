@@ -8,6 +8,7 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  
 
   const handleLogin = async () => {
     try {
@@ -22,7 +23,7 @@ const Login = () => {
 
         setUsername("");
         setPassword("");
-        navigate("/");
+        navigate("/Home");
       } else {
         console.error("Login failed:", response.data.message);
       }

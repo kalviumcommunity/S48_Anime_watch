@@ -1,0 +1,29 @@
+.add-button-container {
+    position: absolute;
+    top: 25px;
+    right: 50px;
+}  
+
+.anime-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 50px;
+    padding: 20px;
+}
+  
+.anime-item {
+    text-align: center;
+}
+
+.anime-image {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+}
+
+.anime-name {
+    margin-top: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+  
