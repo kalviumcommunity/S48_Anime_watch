@@ -10,10 +10,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    password: {
-        type: String,
-        required: true
-    },
     favorite_anime_list: Array,
     watchlist: Array
 });
@@ -27,6 +23,13 @@ const registrationSchema = Joi.object({
     favorite_anime_list: Joi.array().items(Joi.string()),
     watchlist: Joi.array().items(Joi.string())
 });
+
+const createUser=Joi.object({
+  username: Joi.string().required(),
+   email: Joi.string().required(), 
+   favorite_anime_list: Joi.string().required(),
+    watchlist: Joi.string().required()
+})
 
 const SignSchema = new mongoose.Schema({
     username: String,
@@ -60,5 +63,7 @@ module.exports = {
     SignupModel,
     addSignup,
     LoginModel,
-    addLogin
+    addLogin,
+    LoginSchema,
+    createUser
 };

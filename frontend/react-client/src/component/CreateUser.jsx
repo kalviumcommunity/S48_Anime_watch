@@ -12,16 +12,19 @@ function CreateUser(){
     const Submit = (e) =>{
         e.preventDefault();
         axios.post("http://localhost:3000/createuser", {
-            username: username,
-            email: email,
-            favorite_anime_list: favorite_anime_list,
-            watchlist: watchlist
+            username,
+            email,
+            favorite_anime_list,
+            watchlist
         })
         .then(result => {
             console.log(result)
             navigate('/Users')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+            alert(err.response.data)
+            console.log(err.response.data)
+        })
     }
 
     return(
@@ -32,7 +35,7 @@ function CreateUser(){
                     <div className="mb-2">
                         <label htmlFor="">Name </label>
                         <input type="text" placeholder="Enter Name" className="form-control"
-                        onChange={(e)=>setUsername(e.target.value)}/> {/* <-- Set username state */}
+                        onChange={(e)=>setUsername(e.target.value)}/>
                     </div>
                     <div className="mb-2">
                         <label htmlFor="">Email </label>

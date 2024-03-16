@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const Joi = require('joi');
 const bcrypt = require('bcrypt'); // Import bcrypt for password hashing
-const { UserModel, LoginModel, addLogin, SignupModel, addSignup } = require('./model/user'); // Import UserModel and loginSchema
+const { UserModel, LoginModel, addLogin, SignupModel, addSignup,createUser } = require('./model/user'); // Import UserModel and loginSchema
+const { ListModel, ListSchema, addList} = require('./model/List')
 const routes = require('./routes');
 
 const app = express();
@@ -55,7 +56,7 @@ app.post("/createUser", async (req, res) => {
     const { username, email, favorite_anime_list, watchlist } = req.body;
 
     // Validate request body using Joi
-    const { error } = schema.validate({ username, email });
+    const { error } = createUser.validate({  username, email, favorite_anime_list, watchlist});
     if (error) {
       return res.status(400).send(error.details[0].message);
     }
@@ -93,6 +94,18 @@ app.post("/createUser", async (req, res) => {
   }
 });
 
+app.get('/api/users', async (req,res)=>{
+    SignupModel.find()
+    .then(item => res.json(item))
+    .catch(err=>res.json(err))
+})
+
+app.get('/api/lists', async (req,res)=>{
+  ListModel.find()
+  .then(item => res.json(item))
+  .catch(err=>res.json(err))
+})
+
 app.post("/api/signup", async (req, res) => {
   try {
     const { username, email, password } = req.body;
@@ -113,17 +126,17 @@ app.post("/api/signup", async (req, res) => {
     }
 
     // Create a new user
-    const signupuser = new SignupModel({
+    const List = new SignupModel({
       username,
       email,
       password,
     });
-    await signupuser.save();
+    await List.save();
 
     res.json({
       success: true,
       message: "User created successfully",
-      user: signupuser,
+      user: List,
     });
   } catch (error) {
     // Handle any unexpected errors
@@ -133,6 +146,40 @@ app.post("/api/signup", async (req, res) => {
       message: "An error occurred while creating the user",
     });
   }
+});
+
+app.post("/api/addlist", async (req, res) => {
+  try {
+    const { Watchlist, Favouriteanime,createdby} = req.body;
+
+    // Validate request body using Joi
+    const { error } = addList.validate({ Watchlist, Favouriteanime , createdby});
+    if (error) {
+      return res.status(400).send(error.details[0].message);
+    }
+
+    // Create a new user
+    const List = new ListModel({
+      Watchlist,
+      Favouriteanime,
+      createdby
+    });
+    await List.save();
+
+    res.json({
+      success: true,
+      message: "User created successfully",
+      user: List,
+    });
+  } catch (error) {
+    // Handle any unexpected errors
+    console.error("Error creating list:", error);
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while creating the List",
+    });
+  }
+
 });
 
 app.post("/api/login", async (req, res) => {
