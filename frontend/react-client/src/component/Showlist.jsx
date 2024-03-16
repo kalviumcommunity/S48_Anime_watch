@@ -34,18 +34,18 @@ const [users, setUsers] = useState([])
             }
             </select>
             <div>
-                {
-                    Lists.filter(item => item.createdby == selectedValue).map(
-                        (List, i)=>(
-                            <div key={i}>
-                                <p><h1>Watchlist</h1></p>
-                                <h2>{List.Watchlist}</h2> <br />
-                                <p><h1>Favouriteanime</h1></p>
-                                <h2>{List.Favouriteanime}</h2>
-                            </div>
-                        )
+            {
+                Lists.filter(item => item.createdby == selectedValue).map(
+                    (List, i)=>(
+                        <div key={i}>
+                            <p>Watchlist</p>
+                            <h2>{List.Watchlist}</h2> <br />
+                            <p>Favouriteanime</p>
+                            <h2>{List.Favouriteanime}</h2>
+                        </div>
                     )
-                }
+                )
+            }
             </div>
         </div>
 
