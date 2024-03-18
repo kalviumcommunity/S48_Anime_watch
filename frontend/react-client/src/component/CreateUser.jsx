@@ -11,7 +11,7 @@ function CreateUser(){
 
     const Submit = (e) =>{
         e.preventDefault();
-        axios.post("http://localhost:3000/createuser", {
+        axios.post("https://anime-watch.onrender.com/createuser", {
             username,
             email,
             favorite_anime_list,

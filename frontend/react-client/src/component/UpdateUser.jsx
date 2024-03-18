@@ -11,7 +11,7 @@ function UpdateUser() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get(`http://localhost:3000/getUser/${id}`)
+        axios.get(`https://anime-watch.onrender.com/getUser/${id}`)
             .then(response => {
                 const { username, email, favorite_anime_list, watchlist } = response.data;
                 setUsername(username);

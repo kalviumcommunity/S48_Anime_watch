@@ -21,7 +21,7 @@ export default function List() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-        axios.post("http://localhost:3000/api/addlist", {
+        axios.post("https://anime-watch.onrender.com/api/addlist", {
             Watchlist: formData.Watchlist,
             Favouriteanime: formData.Favouriteanime,
             createdby : username
