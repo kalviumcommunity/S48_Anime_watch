@@ -37,9 +37,9 @@ Database: MongoDB
 
 Render Deployment Link
 
-https://anime-watch.onrender.com/
+https://anime-watch.onrender.com
 
 
-Deployed Link using Cloudflare
+Deployed Link using Netfly
 
-https://anime-watch.pages.dev/
+https://dancing-granita-93f609.netlify.app/

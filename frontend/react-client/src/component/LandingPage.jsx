@@ -16,7 +16,7 @@ function AnimeWebsite() {
                 <div className="top-bar">
                     <Link to="/login" className="login-signup-btn">Login</Link>
                     <Link to="/Signup" className="login-signup-btn">Signup</Link>
-                    <Link to="/Users" className="login-signup-btn">Userlist</Link>
+                    {/* <Link to="/Users" className="login-signup-btn">Userlist</Link> */}
                 </div>
             </div>
 
