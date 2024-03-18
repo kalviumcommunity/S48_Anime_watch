@@ -7,14 +7,14 @@ const [users, setUsers] = useState([])
     const [selectedValue, setselectedValue]=  useState()
 
     useEffect(() => {
-      axios.get('http://localhost:3000/api/users')
+      axios.get('https://anime-watch.onrender.com/api/users')
       .then(result => {setUsers(result.data)
     })
       .catch(err => console.log(err))
     },[])
 
     useEffect(() => {
-        axios.get('http://localhost:3000/api/lists')
+        axios.get('https://anime-watch.onrender.com/api/lists')
         .then(result => {setlists(result.data)
       })
         .catch(err => console.log(err))
